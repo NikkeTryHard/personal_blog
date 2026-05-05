@@ -15,7 +15,7 @@ function Hero() {
       <RandomSplash />
     </h1>
     <p className="mt-5 max-w-[620px] font-code-body text-code-body text-on-surface-variant">
-      You can clone this tech blog and use it as a base for your own. Just keep credit to SHOKANEKO somewhere visible if you ship it.
+      You can clone this tech blog and use it as a base for your own. Just keep credit to NikkeTryHard somewhere visible if you ship it.
     </p>
     <CloneBox /></div></section>
   );
