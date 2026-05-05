@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import { ThemeToggle } from './theme-toggle';
+import { FooterNav, PrimaryNav } from './nav';
 
-const navItems = [
-  ['home', '/'],
-  ['articles', '/article'],
-  ['profile', '/profile'],
-] as const;
+
 
 export function Header() {
   return (
@@ -16,13 +13,7 @@ export function Header() {
             SHOKANEKO
           </Link>
           <div className="flex min-w-[500px] items-center justify-end gap-6">
-            <nav className="hidden items-center gap-6 md:flex" aria-label="Primary navigation">
-              {navItems.map(([item, href]) => (
-                <Link className="material-symbols-outlined text-[9px] font-thin text-on-surface-variant opacity-70 hover:text-primary hover:opacity-100" href={href} key={item}>
-                  {item}
-                </Link>
-              ))}
-            </nav>
+            <PrimaryNav />
             <a className="op-button inline-flex items-center gap-2" href="#search" data-search-trigger aria-label="Search Ctrl K"><span className="material-symbols-outlined text-[14px] text-on-primary">search</span><span className="hidden font-ui-label text-ui-label md:inline">Ctrl + K</span></a>
             <div className="theme-toggle-slot"><ThemeToggle /></div>
           </div>
@@ -37,9 +28,7 @@ export function Footer() {
     <footer className="mt-auto">
       <div className="page-shell border-t border-outline-variant py-8">
         <div className="middle-column">
-          <nav className="flex justify-center gap-6" aria-label="Footer navigation">
-            {navItems.map(([item, href]) => <Link className="font-ui-label text-ui-label text-on-surface-variant hover:text-primary" href={href} key={item}>{item}</Link>)}
-          </nav>
+          <FooterNav />
         </div>
       </div>
     </footer>

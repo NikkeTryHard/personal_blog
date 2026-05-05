@@ -191,6 +191,31 @@ button, input { font: inherit; }
   justify-content: flex-end;
 }
 
+
+.nav-link {
+  position: relative;
+  font-family: 'Material Symbols Outlined';
+  font-size: 9px;
+  font-weight: 100;
+  color: var(--on-surface-variant);
+  opacity: 0.7;
+}
+
+.nav-link:hover,
+.nav-link-active {
+  color: var(--primary);
+  opacity: 1;
+}
+
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -21px;
+  height: 1px;
+  background: var(--primary);
+}
 .op-link { color: var(--on-surface-variant); }
 .op-link:hover { color: var(--primary); }
 
