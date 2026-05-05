@@ -92,6 +92,8 @@ html { background: var(--canvas); }
 :root {
   --rail-width: min(1080px, calc(100vw - 48px));
   --content-width: min(760px, calc(var(--rail-width) - 72px));
+  --intersection-size: 7px;
+  --intersection-offset: calc(var(--intersection-size) / -2);
 }
 
 body {
@@ -145,11 +147,32 @@ button, input { font: inherit; }
 }
 
 .section-line {
+  position: relative;
   border-bottom: 1px solid var(--outline-variant);
   padding: 48px 0;
 }
 
+.section-line::before,
+.section-line::after {
+  content: '';
+  position: absolute;
+  bottom: var(--intersection-offset);
+  width: var(--intersection-size);
+  height: var(--intersection-size);
+  background: var(--background);
+  border: 1px solid var(--outline-variant);
+  pointer-events: none;
+}
+
+.section-line::before { left: var(--intersection-offset); }
+.section-line::after { right: var(--intersection-offset); }
+
 .section-line:first-child { border-top: 1px solid var(--outline-variant); }
+.section-line:first-child::before,
+.section-line:first-child::after {
+  top: var(--intersection-offset);
+  bottom: auto;
+}
 
 .rule-grid {
   background-image:
