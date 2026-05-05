@@ -55,7 +55,7 @@ export function ThemeToggle() {
   }
 
   return (
-    <button className="text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
+    <button className="flex w-16 justify-end text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
       <span className="material-symbols-outlined text-[14px]">{mode}</span>
     </button>
   );

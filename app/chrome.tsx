@@ -15,7 +15,7 @@ export function Header() {
           <Link className="font-headline-primary text-[24px] font-black tracking-[-0.08em] text-primary" href="/" aria-label="SHOKANEKO home">
             SHOKANEKO
           </Link>
-          <div className="flex items-center gap-6">
+          <div className="flex min-w-[500px] items-center justify-end gap-6">
             <nav className="hidden items-center gap-6 md:flex" aria-label="Primary navigation">
               {navItems.map(([item, href]) => (
                 <Link className="material-symbols-outlined text-[9px] font-thin text-on-surface-variant opacity-70 hover:text-primary hover:opacity-100" href={href} key={item}>
@@ -24,7 +24,7 @@ export function Header() {
               ))}
             </nav>
             <a className="op-button inline-flex items-center gap-2" href="#search" data-search-trigger aria-label="Search Ctrl K"><span className="material-symbols-outlined text-[14px] text-on-primary">search</span><span className="hidden font-ui-label text-ui-label md:inline">Ctrl + K</span></a>
-            <ThemeToggle />
+            <div className="theme-toggle-slot"><ThemeToggle /></div>
           </div>
         </div>
       </div>

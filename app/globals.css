@@ -185,6 +185,12 @@ button, input { font: inherit; }
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 }
 
+.theme-toggle-slot {
+  width: 64px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .op-link { color: var(--on-surface-variant); }
 .op-link:hover { color: var(--primary); }
 
