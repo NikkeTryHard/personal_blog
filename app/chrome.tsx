@@ -11,6 +11,7 @@ const navItems = [
 export function Header() {
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-outline-variant bg-background/95">
+      <FrameMarkers />
       <div className="page-shell h-16 border-t-0 bg-transparent">
         <FrameMarkers />
         <div className="middle-column flex h-16 items-center justify-between">
