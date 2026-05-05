@@ -32,21 +32,23 @@ function applyTheme(mode: ThemeMode, persist = true) {
 }
 
 export function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>('system');
+  const [mode, setMode] = useState<ThemeMode>(() => {
+    if (typeof document === 'undefined') return 'system';
+    const stored = document.documentElement.dataset.themeMode ?? localStorage.getItem('theme');
+    return isThemeMode(stored) ? stored : 'system';
+  });
 
   useEffect(() => {
-    const initial = getStoredTheme();
-    setMode(initial);
-    applyTheme(initial, false);
+    if (mode !== 'system') {
+      applyTheme(mode, false);
+      return;
+    }
 
     const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const onChange = () => {
-      if (getStoredTheme() === 'system') applyTheme('system', false);
-    };
-
+    const onChange = () => applyTheme('system', false);
     media.addEventListener('change', onChange);
     return () => media.removeEventListener('change', onChange);
-  }, []);
+  }, [mode]);
 
   function cycleTheme() {
     const next = modes[(modes.indexOf(mode) + 1) % modes.length];
@@ -55,7 +57,7 @@ export function ThemeToggle() {
   }
 
   return (
-    <button className="flex w-16 justify-end text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
+    <button suppressHydrationWarning className="flex w-16 justify-end text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
       <span className="material-symbols-outlined text-[14px]">{mode}</span>
     </button>
   );
