@@ -92,7 +92,7 @@ html { background: var(--canvas); }
 :root {
   --rail-width: min(1080px, calc(100vw - 48px));
   --content-width: min(760px, calc(var(--rail-width) - 72px));
-  --intersection-size: 10px;
+  --intersection-size: 5px;
   --intersection-offset: calc(var(--intersection-size) / -2);
 }
 
@@ -139,6 +139,7 @@ button, input { font: inherit; }
 .page-shell {
   width: var(--rail-width);
   margin: 0 auto;
+  position: relative;
 }
 
 .middle-column {
@@ -153,19 +154,21 @@ button, input { font: inherit; }
 }
 
 .section-line::before,
-.section-line::after {
+.section-line::after,
+.frame-marker {
   content: '';
   position: absolute;
-  bottom: var(--intersection-offset);
   width: var(--intersection-size);
   height: var(--intersection-size);
-  background: var(--primary);
-  border: 1px solid var(--background);
+  background: var(--background);
+  border: 1px solid var(--outline);
   transform: rotate(45deg);
   z-index: 2;
   pointer-events: none;
 }
 
+.section-line::before,
+.section-line::after { bottom: var(--intersection-offset); }
 .section-line::before { left: var(--intersection-offset); }
 .section-line::after { right: var(--intersection-offset); }
 
@@ -175,6 +178,15 @@ button, input { font: inherit; }
   top: var(--intersection-offset);
   bottom: auto;
 }
+
+.frame-marker-top-left,
+.frame-marker-top-right { top: var(--intersection-offset); }
+.frame-marker-bottom-left,
+.frame-marker-bottom-right { bottom: var(--intersection-offset); }
+.frame-marker-top-left,
+.frame-marker-bottom-left { left: var(--intersection-offset); }
+.frame-marker-top-right,
+.frame-marker-bottom-right { right: var(--intersection-offset); }
 
 .rule-grid {
   background-image:
