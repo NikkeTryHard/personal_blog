@@ -194,6 +194,9 @@ button, input { font: inherit; }
 
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 64px;
   font-family: 'Material Symbols Outlined';
   font-size: 9px;
   font-weight: 100;
@@ -212,7 +215,7 @@ button, input { font: inherit; }
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -21px;
+  bottom: 0;
   height: 1px;
   background: var(--primary);
 }
