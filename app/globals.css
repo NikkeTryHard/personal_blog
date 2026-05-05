@@ -92,7 +92,7 @@ html { background: var(--canvas); }
 :root {
   --rail-width: min(1080px, calc(100vw - 48px));
   --content-width: min(760px, calc(var(--rail-width) - 72px));
-  --intersection-size: 7px;
+  --intersection-size: 10px;
   --intersection-offset: calc(var(--intersection-size) / -2);
 }
 
@@ -159,8 +159,10 @@ button, input { font: inherit; }
   bottom: var(--intersection-offset);
   width: var(--intersection-size);
   height: var(--intersection-size);
-  background: var(--background);
-  border: 1px solid var(--outline-variant);
+  background: var(--primary);
+  border: 1px solid var(--background);
+  transform: rotate(45deg);
+  z-index: 2;
   pointer-events: none;
 }
 
