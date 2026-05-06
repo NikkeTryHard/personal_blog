@@ -11,7 +11,7 @@ export async function Header() {
   const initialTheme = themeCookie === 'light' || themeCookie === 'dark' || themeCookie === 'system' ? themeCookie : 'dark';
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-outline-variant bg-background/95">
+    <header className="fixed left-0 top-0 z-50 w-full bg-background/95">
       <div className="page-shell h-16 border-t-0 bg-transparent">
         <div className="middle-column flex h-16 items-center justify-between">
           <Link className="font-headline-primary text-[24px] font-black tracking-[-0.08em] text-primary" href="/" aria-label="SHOKANEKO home">

@@ -208,14 +208,10 @@ button, input { font: inherit; }
   color: var(--primary);
 }
 
-.nav-link-active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: var(--primary);
+.nav-link-active {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 8px;
 }
 
 
