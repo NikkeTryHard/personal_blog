@@ -90,7 +90,10 @@ export default function ProfilePage() {
             <div className="grid gap-8 md:grid-cols-[160px_1fr]">
               <div className="grid h-24 w-24 place-items-center border border-outline-variant bg-primary font-headline-primary text-[28px] font-black text-on-primary">SK</div>
               <div>
-                <h1 className="font-headline-primary text-[34px] font-black leading-tight tracking-[-0.06em] text-primary">Sho Kaneko</h1>
+                <div className="flex items-start justify-between gap-4">
+                  <h1 className="font-headline-primary text-[34px] font-black leading-tight tracking-[-0.06em] text-primary">Sho Kaneko</h1>
+                  <a className="op-button shrink-0" href="/Sho_Kaneko_Resume_2026.pdf" download>Resume</a>
+                </div>
                 <div className="mt-3 flex flex-wrap gap-3 font-ui-label text-ui-label text-on-surface-variant">
                   <span>Computer Science @ UT Arlington</span>
                   <span>Arlington, TX</span>
@@ -128,7 +131,7 @@ export default function ProfilePage() {
                   <h3 className="font-code-body text-code-body font-bold text-primary group-hover:underline">{project.name}</h3>
                   <p className="mt-1 font-status-label text-status-label text-on-surface-variant">{project.meta}</p>
                   <ul className="mt-3 space-y-1 font-code-body text-code-body text-on-surface-variant">
-                    {project.points.map((point) => <li key={point}>{point}</li>)}
+                    {project.points.map((point) => <li key={point}>- {point}</li>)}
                   </ul>
                 </div>
                 <span className="status-pill px-2 py-1">open</span>
