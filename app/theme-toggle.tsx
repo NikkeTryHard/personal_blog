@@ -30,12 +30,8 @@ function applyTheme(mode: ThemeMode) {
   writeCookie('theme_resolved', resolved);
 }
 
-export function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>(() => {
-    if (typeof document === 'undefined') return 'dark';
-    const serverMode = document.documentElement.dataset.themeMode;
-    return isThemeMode(serverMode) ? serverMode : 'dark';
-  });
+export function ThemeToggle({ initialMode }: { initialMode: ThemeMode }) {
+  const [mode, setMode] = useState<ThemeMode>(initialMode);
 
   useEffect(() => {
     applyTheme(mode);
@@ -53,8 +49,8 @@ export function ThemeToggle() {
   }
 
   return (
-    <button suppressHydrationWarning className="flex w-16 justify-end text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
-      <span suppressHydrationWarning className="material-symbols-outlined text-[14px]">{mode}</span>
+    <button className="flex w-16 justify-end text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
+      <span className="material-symbols-outlined text-[14px]">{mode}</span>
     </button>
   );
 }

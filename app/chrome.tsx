@@ -1,10 +1,15 @@
 import Link from 'next/link';
+import { cookies } from 'next/headers';
 import { ThemeToggle } from './theme-toggle';
 import { FooterNav, PrimaryNav } from './nav';
 
 
 
-export function Header() {
+export async function Header() {
+  const cookieStore = await cookies();
+  const themeCookie = cookieStore.get('theme')?.value;
+  const initialTheme = themeCookie === 'light' || themeCookie === 'dark' || themeCookie === 'system' ? themeCookie : 'dark';
+
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-outline-variant bg-background/95">
       <div className="page-shell h-16 border-t-0 bg-transparent">
@@ -15,7 +20,7 @@ export function Header() {
           <div className="flex min-w-[500px] items-center justify-end gap-6">
             <PrimaryNav />
             <a className="op-button inline-flex items-center gap-2" href="#search" data-search-trigger aria-label="Search Ctrl K"><span className="material-symbols-outlined text-[14px] text-on-primary">search</span><span className="hidden font-ui-label text-ui-label md:inline">Ctrl + K</span></a>
-            <div className="theme-toggle-slot"><ThemeToggle /></div>
+            <div className="theme-toggle-slot"><ThemeToggle initialMode={initialTheme} /></div>
           </div>
         </div>
       </div>
