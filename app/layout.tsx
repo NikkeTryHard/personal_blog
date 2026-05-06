@@ -8,6 +8,10 @@ const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'], 
 export const metadata: Metadata = {
   title: 'SHOKANEKO',
   description: 'High-density personal blog built with Next.js and Bun.',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.svg',
+  },
 };
 
 export default async function RootLayout({
