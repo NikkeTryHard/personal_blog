@@ -1,0 +1,44 @@
+import { ArticleSection, DecisionCard, FlowTrace, MetricGrid, ProjectArticleLayout } from '../project-components';
+
+export default function Article() {
+  return (
+    <ProjectArticleLayout
+      title="ZeroGravity"
+      role="Rust AI proxy infrastructure"
+      signal="670 stars · 45 forks · 9k+ downloads"
+      repo="https://github.com/NikkeTryHard/zerogravity"
+      summary="A backstory on why a proxy became the cleanest boundary between AI coding tools and a messy provider ecosystem."
+    >
+      <ArticleSection title="Ecosystem">
+        <p>The current AI tooling ecosystem is not one ecosystem. It is a pile of <strong>almost-compatible APIs</strong>: OpenAI-style chat completions, Anthropic tool calls, Gemini formats, provider-specific streaming, and coding agents that assume one of those shapes is the world.</p>
+        <p>That breaks the moment the best model for the job is behind a different surface. The client does not care about provider politics. It wants a stable request shape, predictable streaming, and tool-call semantics that do not collapse halfway through a run.</p>
+        <p>So the real problem was not “call another model.” The problem was <strong>where to put the incompatibility</strong> so the rest of the toolchain could stay boring.</p>
+      </ArticleSection>
+
+      <ArticleSection title="How I got there">
+        <p>I kept seeing the same failure mode: every client grows adapter code, every adapter drifts, and every upstream quirk leaks into places that should not know about it. That is how small compatibility hacks become permanent architecture debt.</p>
+        <p>The conclusion was simple: push all provider weirdness behind <strong>one proxy boundary</strong>. Let coding tools keep speaking the dialect they already know. Let the proxy own translation, deployment, and operational failure.</p>
+        <DecisionCard label="cut" title="The proxy is the product boundary">
+          <p>If a caller receives plausible output after translation failed, the system lies. So the proxy has to preserve enough semantics that clients can trust what came back: message roles, tool calls, streaming chunks, and error shape.</p>
+        </DecisionCard>
+      </ArticleSection>
+
+      <ArticleSection title="Shape">
+        <FlowTrace steps={['OpenAI / Anthropic / Gemini-shaped request', 'ZeroGravity translation boundary', 'HTTP/2 + TLS upstream session', 'provider response stream', 'client-compatible tool response']} />
+      </ArticleSection>
+
+      <ArticleSection title="Signal">
+        <MetricGrid items={[["30", "public releases"], ["670+", "GitHub stars"], ["9k+", "downloads"]]} />
+      </ArticleSection>
+
+      <ArticleSection title="What mattered">
+        <ul>
+          <li><strong>Stable client contract</strong> mattered more than clever provider code.</li>
+          <li><strong>Docker-first deployment</strong> made the project reproducible instead of “works on my machine.”</li>
+          <li><strong>Translation correctness</strong> mattered because one dropped tool field can corrupt an entire agent run.</li>
+        </ul>
+        <p>The repo surface is distribution/docs heavy and the project has discontinuation notes, so this page treats ZeroGravity as an infrastructure design story, not as a promise that the upstream boundary still exists unchanged.</p>
+      </ArticleSection>
+    </ProjectArticleLayout>
+  );
+}

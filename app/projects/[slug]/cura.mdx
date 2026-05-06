@@ -1,0 +1,43 @@
+import { ArticleSection, DecisionCard, FlowTrace, MetricGrid, ProjectArticleLayout } from '../project-components';
+
+export default function Article() {
+  return (
+    <ProjectArticleLayout
+      title="Cura"
+      role="HackUTD 2025 CBRE winner"
+      signal="Next.js · FastAPI · agentic CRE analytics"
+      repo="https://github.com/armaanamatya/HackUTD2025"
+      summary="A backstory on shipping a commercial real-estate intelligence prototype when the hard part is compressing research time."
+    >
+      <ArticleSection title="Ecosystem">
+        <p>Commercial real estate work is full of half-structured material: property docs, market context, financial assumptions, local signals, and reports that do not naturally fit one clean table.</p>
+        <p>The current AI ecosystem is good at demos that answer one question. The useful product shape is harder: <strong>ingest messy source material, preserve context, and produce decision-ready analysis</strong> without hiding where the signal came from.</p>
+      </ArticleSection>
+
+      <ArticleSection title="How I got there">
+        <p>Hackathon time forces a clean cut. You cannot build a perfect CRE platform in 24 hours, so you build the shortest path from document to useful decision surface.</p>
+        <p>That led to a split architecture: parser, backend agents, persistent storage, and frontend dashboard. Each layer could move independently while still showing one story to the user.</p>
+        <DecisionCard label="scope" title="Prototype the decision loop, not the enterprise suite">
+          <p>The goal was not to automate all CRE work. It was to show that an agentic workflow can compress the early research loop: read, extract, reason, present.</p>
+        </DecisionCard>
+      </ArticleSection>
+
+      <ArticleSection title="Shape">
+        <FlowTrace steps={['property document', 'parser', 'FastAPI backend', 'CrewAI agents', 'MongoDB Atlas', 'Next.js dashboard']} />
+      </ArticleSection>
+
+      <ArticleSection title="Signal">
+        <MetricGrid items={[["24h", "hackathon build"], ["CBRE", "track winner"], ["3", "major layers"]]} />
+      </ArticleSection>
+
+      <ArticleSection title="What mattered">
+        <ul>
+          <li><strong>Document intelligence</strong> was the entry point, because CRE data starts messy.</li>
+          <li><strong>Agent orchestration</strong> made the prototype about a workflow, not one prompt.</li>
+          <li><strong>Next.js dashboarding</strong> gave the reasoning a visible operator surface.</li>
+        </ul>
+        <p>Cura is a hackathon prototype. This page does not pretend it has production reliability; it explains the product and architecture bet under time pressure.</p>
+      </ArticleSection>
+    </ProjectArticleLayout>
+  );
+}

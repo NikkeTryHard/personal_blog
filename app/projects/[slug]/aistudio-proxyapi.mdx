@@ -1,0 +1,43 @@
+import { ArticleSection, DecisionCard, FlowTrace, MetricGrid, ProjectArticleLayout } from '../project-components';
+
+export default function Article() {
+  return (
+    <ProjectArticleLayout
+      title="AIstudio ProxyAPI"
+      role="Browser automation API bridge"
+      signal="2.2k+ stars · FastAPI · Playwright"
+      repo="https://github.com/CJackHwang/AIstudioProxyAPI"
+      summary="A backstory on turning a consumer web UI into a usable API without pretending browser automation is normal backend infrastructure."
+    >
+      <ArticleSection title="Ecosystem">
+        <p>AI Studio has the thing developers want: access to model behavior through a browser-first surface. Standard coding tools have a different assumption: <strong>send JSON to an API and stream JSON back</strong>.</p>
+        <p>The ecosystem gap is obvious. People want OpenAI-compatible clients, local tools, and agent runners to talk to a product that was not designed as that kind of programmable backend. Browser automation becomes the bridge because the UI is the only stable-enough public path for some workflows.</p>
+      </ArticleSection>
+
+      <ArticleSection title="How I got there">
+        <p>The first instinct is to treat it like a normal proxy. That is wrong. A browser-backed API fails in UI ways: selectors move, sessions expire, pages hang, captcha-like friction appears, and one browser instance can eat more memory than a small backend service.</p>
+        <p>So the right question became: <strong>how do you make UI automation look like an API without lying about the failure modes?</strong></p>
+        <DecisionCard label="truth" title="The browser is part of the backend">
+          <p>Once the browser is in the request path, reliability work changes. Queueing, session rotation, stream parsing, and UI state inspection are not extras. They are the actual backend.</p>
+        </DecisionCard>
+      </ArticleSection>
+
+      <ArticleSection title="Shape">
+        <FlowTrace steps={['OpenAI-compatible client request', 'FastAPI middleware', 'Playwright / Camoufox browser session', 'Google AI Studio web UI', 'stream parser', 'client response']} />
+      </ArticleSection>
+
+      <ArticleSection title="Signal">
+        <MetricGrid items={[["#2", "contributor rank"], ["2.2k+", "repo stars"], ["65", "releases"]]} />
+      </ArticleSection>
+
+      <ArticleSection title="What mattered">
+        <ul>
+          <li><strong>Streaming translation</strong> is the core user experience, not a polish feature.</li>
+          <li><strong>Request queueing</strong> prevents browser state from becoming shared mutable chaos.</li>
+          <li><strong>Frontend modernization and tests</strong> mattered because the Web UI is also an operator console.</li>
+        </ul>
+        <p>The repo is AGPLv3 and browser automation is fragile against upstream UI changes. That constraint is part of the architecture, not a footnote.</p>
+      </ArticleSection>
+    </ProjectArticleLayout>
+  );
+}

@@ -1,0 +1,43 @@
+import { ArticleSection, DecisionCard, FlowTrace, MetricGrid, ProjectArticleLayout } from '../project-components';
+
+export default function Article() {
+  return (
+    <ProjectArticleLayout
+      title="Tenhou-to-MJAI"
+      role="Mahjong dataset ETL"
+      signal="12GB dataset · 2.72B events"
+      repo="https://github.com/NikkeTryHard/tenhou-to-mjai"
+      summary="A backstory on why mahjong AI needed boring data plumbing before it could have interesting models."
+    >
+      <ArticleSection title="Ecosystem">
+        <p>Mahjong AI research does not start with a model. It starts with game logs that were never meant to be your training set. Tenhou, Majsoul, and MJAI all describe the same domain from different operational angles.</p>
+        <p>The ecosystem gap is format gravity. Raw logs are valuable, but every downstream learner pays the conversion cost unless someone creates a stable dataset boundary.</p>
+      </ArticleSection>
+
+      <ArticleSection title="How I got there">
+        <p>The conclusion was that the converter had to be more than a script. At millions of games, correctness and validation matter as much as speed. A silent conversion bug becomes poisoned training data.</p>
+        <p>So the system became an ETL pipeline: scrape, decode, normalize, package, validate. That sounds boring. It is exactly the point.</p>
+        <DecisionCard label="boundary" title="MJAI is the shared language">
+          <p>MJAI gives agents one event stream to consume. Once raw platform logs become normalized MJAI, model code can stop caring where a game came from and focus on policy, value, and evaluation.</p>
+        </DecisionCard>
+      </ArticleSection>
+
+      <ArticleSection title="Shape">
+        <FlowTrace steps={['raw XML / Protobuf logs', 'scraper', 'converter', 'MJAI normalization', 'gzip packaging', 'streaming validation']} />
+      </ArticleSection>
+
+      <ArticleSection title="Signal">
+        <MetricGrid items={[["18", "yearly archives"], ["12GB", "published dataset"], ["2.72B", "MJAI event lines"]]} />
+      </ArticleSection>
+
+      <ArticleSection title="What mattered">
+        <ul>
+          <li><strong>Streaming validation</strong> catches dataset corruption before it reaches training.</li>
+          <li><strong>Rust in the hot path</strong> keeps heavy conversion practical.</li>
+          <li><strong>Format normalization</strong> turns platform-specific logs into research infrastructure.</li>
+        </ul>
+        <p>External game platforms can change APIs and data access rules. Dataset redistribution also carries licensing/platform constraints, so the article treats the pipeline as infrastructure with real boundaries.</p>
+      </ArticleSection>
+    </ProjectArticleLayout>
+  );
+}

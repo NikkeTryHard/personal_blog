@@ -1,0 +1,42 @@
+import { ArticleSection, DecisionCard, FlowTrace, MetricGrid, ProjectArticleLayout } from '../project-components';
+
+export default function Article() {
+  return (
+    <ProjectArticleLayout
+      title="Hydra"
+      role="Open-source riichi mahjong AI"
+      signal="Rust engine · training infrastructure"
+      repo="https://github.com/NikkeTryHard/hydra"
+      summary="A backstory on building mahjong AI as auditable infrastructure instead of a pile of model experiments."
+    >
+      <ArticleSection title="Ecosystem">
+        <p>Riichi mahjong AI has a gap between strong closed systems and open research infrastructure. People can talk about model strength, but reproducible engines, training data, evaluation loops, and audit trails are much harder to share.</p>
+        <p>The ecosystem problem is not just “train a better model.” It is that model work sits on a stack of assumptions: rules correctness, simulator behavior, search/runtime decisions, data quality, and evaluation honesty. If those are blurry, the final score means less than it looks.</p>
+      </ArticleSection>
+
+      <ArticleSection title="How I got there">
+        <p>I landed on the idea that Hydra had to be a <strong>layered system</strong>, not a notebook with a model attached. Rules should not be rewritten by training code. Runtime/search should not silently change game truth. Research claims should not live only in memory.</p>
+        <DecisionCard label="audit" title="Claims first, code second">
+          <p>The repo keeps design docs and canonical claim archives because implementation needs an epistemic root. When a benchmark fails, the system should expose which assumption failed instead of forcing a maintainer to guess.</p>
+        </DecisionCard>
+      </ArticleSection>
+
+      <ArticleSection title="Shape">
+        <FlowTrace steps={['canonical archive claims', 'hydra-engine rules', 'hydra-core runtime/search/simulator', 'hydra-train orchestration', 'evaluation logs and failure triage']} />
+      </ArticleSection>
+
+      <ArticleSection title="Signal">
+        <MetricGrid items={[["2.36x", "lower single-game latency"], ["8.0x", "higher 4-core throughput"], ["6M+", "games across validation"]]} />
+      </ArticleSection>
+
+      <ArticleSection title="What mattered">
+        <ul>
+          <li><strong>Authority separation</strong> keeps engine truth away from model experimentation.</li>
+          <li><strong>Audit-first docs</strong> turn research decisions into traceable implementation constraints.</li>
+          <li><strong>Rust workspace boundaries</strong> make performance work and training orchestration easier to reason about.</li>
+        </ul>
+        <p>Hydra is active research with a split-license model. This page describes observed architecture and intent, not a final model-strength claim.</p>
+      </ArticleSection>
+    </ProjectArticleLayout>
+  );
+}

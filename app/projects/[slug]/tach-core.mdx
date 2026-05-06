@@ -1,0 +1,43 @@
+import { ArticleSection, DecisionCard, FlowTrace, MetricGrid, ProjectArticleLayout } from '../project-components';
+
+export default function Article() {
+  return (
+    <ProjectArticleLayout
+      title="tach-core"
+      role="Python test hypervisor"
+      signal="&lt;50µs reset path · Linux sandboxing"
+      repo="https://github.com/NikkeTryHard/tach-core"
+      summary="A backstory on why Python tests feel slow, why retrying harder is not a system, and why memory snapshots are the real primitive."
+    >
+      <ArticleSection title="Ecosystem">
+        <p>Python testing has a strange bargain: keep tests isolated by restarting state, then pay for that isolation over and over. Forking, fixture rebuilds, database setup, import cost, and process churn quietly become the tax on every feedback loop.</p>
+        <p>Most tools optimize around the edge: better selection, better parallelism, better caching. Useful, but they do not attack the center. The center is that <strong>resetting clean state is too expensive</strong>.</p>
+      </ArticleSection>
+
+      <ArticleSection title="How I got there">
+        <p>The conclusion came from looking at what test runners promise callers. A runner promises truth: this test passed from a clean enough state, or it did not. If speed tricks pollute state, the output becomes a plausible lie.</p>
+        <p>So tach-core takes the harder path: make reset cheap without pretending isolation no longer matters.</p>
+        <DecisionCard label="primitive" title="Snapshots beat reruns">
+          <p>If memory can be restored faster than a process can be rebuilt, the runner can keep the caller contract and still cut the hot path. Linux gives enough primitives to attempt that: userfaultfd, zygote workers, Landlock, and Seccomp.</p>
+        </DecisionCard>
+      </ArticleSection>
+
+      <ArticleSection title="Shape">
+        <FlowTrace steps={['pytest discovery', 'Rust supervisor', 'zygote worker', 'memory snapshot', 'sandboxed test execution', 'structured report']} />
+      </ArticleSection>
+
+      <ArticleSection title="Signal">
+        <MetricGrid items={[["&lt;50µs", "snapshot reset target"], ["~144s→~30s", "Django suite result"], ["9,892", "tests validated"]]} />
+      </ArticleSection>
+
+      <ArticleSection title="What mattered">
+        <ul>
+          <li><strong>Reset latency</strong> is the bottleneck, not CLI polish.</li>
+          <li><strong>Sandboxing</strong> is required because fast untrusted execution is still untrusted execution.</li>
+          <li><strong>Fallback compatibility</strong> matters because pytest ecosystems are messy and fixture behavior can be weird.</li>
+        </ul>
+        <p>This is Linux-specific and alpha. That is not hidden: the system depends on kernel support and capabilities that normal cross-platform Python tools avoid.</p>
+      </ArticleSection>
+    </ProjectArticleLayout>
+  );
+}
