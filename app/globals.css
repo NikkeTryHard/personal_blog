@@ -208,6 +208,16 @@ button, input { font: inherit; }
   color: var(--primary);
 }
 
+.nav-link-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--primary);
+}
+
 
 .op-link { color: var(--on-surface-variant); }
 .op-link:hover { color: var(--primary); }

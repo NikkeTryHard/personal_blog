@@ -6,59 +6,54 @@ type ThemeMode = 'light' | 'dark' | 'system';
 
 const modes: ThemeMode[] = ['light', 'dark', 'system'];
 
-function isThemeMode(value: string | null): value is ThemeMode {
+function isThemeMode(value: string | null | undefined): value is ThemeMode {
   return value === 'light' || value === 'dark' || value === 'system';
-}
-
-function getStoredTheme(): ThemeMode {
-  const stored = localStorage.getItem('theme');
-  return isThemeMode(stored) ? stored : 'system';
 }
 
 function getSystemDark() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
-function applyTheme(mode: ThemeMode, persist = true) {
-  const dark = mode === 'dark' || (mode === 'system' && getSystemDark());
-  document.documentElement.classList.toggle('dark', dark);
-  document.documentElement.dataset.theme = mode === 'system' ? (dark ? 'dark' : 'light') : mode;
-  document.documentElement.dataset.themeMode = mode;
+function writeCookie(name: string, value: string) {
+  document.cookie = `${name}=${value}; path=/; max-age=31536000; samesite=lax`;
+}
 
-  if (persist) {
-    if (mode === 'system') localStorage.removeItem('theme');
-    else localStorage.setItem('theme', mode);
-  }
+function applyTheme(mode: ThemeMode) {
+  const dark = mode === 'dark' || (mode === 'system' && getSystemDark());
+  const resolved = dark ? 'dark' : 'light';
+
+  document.documentElement.classList.toggle('dark', dark);
+  document.documentElement.dataset.theme = resolved;
+  document.documentElement.dataset.themeMode = mode;
+  localStorage.setItem('theme', mode);
+  writeCookie('theme', mode);
+  writeCookie('theme_resolved', resolved);
 }
 
 export function ThemeToggle() {
   const [mode, setMode] = useState<ThemeMode>(() => {
-    if (typeof document === 'undefined') return 'system';
-    const stored = document.documentElement.dataset.themeMode ?? localStorage.getItem('theme');
-    return isThemeMode(stored) ? stored : 'system';
+    const serverMode = document.documentElement.dataset.themeMode;
+    return isThemeMode(serverMode) ? serverMode : 'dark';
   });
 
   useEffect(() => {
-    if (mode !== 'system') {
-      applyTheme(mode, false);
-      return;
-    }
+    applyTheme(mode);
+
+    if (mode !== 'system') return;
 
     const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const onChange = () => applyTheme('system', false);
+    const onChange = () => applyTheme('system');
     media.addEventListener('change', onChange);
     return () => media.removeEventListener('change', onChange);
   }, [mode]);
 
   function cycleTheme() {
-    const next = modes[(modes.indexOf(mode) + 1) % modes.length];
-    setMode(next);
-    applyTheme(next);
+    setMode(modes[(modes.indexOf(mode) + 1) % modes.length]);
   }
 
   return (
     <button suppressHydrationWarning className="flex w-16 justify-end text-primary hover:opacity-60" type="button" onClick={cycleTheme} aria-label={`Theme: ${mode}`} title={`Theme: ${mode}`}>
-      <span className="material-symbols-outlined text-[14px]">{mode}</span>
+      <span suppressHydrationWarning className="material-symbols-outlined text-[14px]">{mode}</span>
     </button>
   );
 }
