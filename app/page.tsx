@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Header, Footer } from './chrome';
 import { posts } from './content';
@@ -5,6 +6,10 @@ import { SearchPanel } from './search-panel';
 import { CloneBox } from './clone-box';
 import { RandomSplash } from './random-title';
 import { FRAME } from './frame';
+
+export const metadata: Metadata = {
+  title: 'home · SHOKANEKO',
+};
 
 function Hero() {
   return (

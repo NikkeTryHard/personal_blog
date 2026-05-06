@@ -1,5 +1,10 @@
+import type { Metadata } from 'next';
 import { Header, Footer } from '../chrome';
 import { SearchPanel } from '../search-panel';
+
+export const metadata: Metadata = {
+  title: 'articles · SHOKANEKO',
+};
 
 const nodes = ['Node 01|status: active\\nload: 12%\\nmem: 1024MB', 'Node 02|status: standby\\nload: 2%\\nmem: 512MB', 'Worker A|processing queue...\\njobs: 42\\nlatency: 12ms', 'DB Primary|syncing... [OK]\\niops: 1420\\nconn: 84'];
 
