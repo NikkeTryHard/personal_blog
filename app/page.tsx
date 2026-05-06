@@ -12,7 +12,7 @@ function Hero() {
       <div className={FRAME.contentClass}>
         <div className="mb-8 flex items-center gap-3 font-ui-label text-ui-label text-on-surface-variant">
           <span className="bg-primary px-2 py-1 text-on-primary">New</span>
-          <span>Personal devlog online. Notes, systems, and build logs.</span>
+          <span className="whitespace-nowrap">Personal devlog online. Notes, systems, and build logs.</span>
         </div>
         <h1 className="max-w-[680px] font-headline-primary text-[34px] font-black leading-tight tracking-[-0.06em] text-primary">
           <RandomSplash />
