@@ -148,7 +148,7 @@ button, input { font: inherit; }
 .section-line {
   position: relative;
   border-bottom: 1px solid var(--outline-variant);
-  padding: 48px 0;
+  padding: 96px 0 48px;
 }
 
 
@@ -242,7 +242,7 @@ button, input { font: inherit; }
   body { background: var(--background); }
   .page-shell { width: 100%; }
   .middle-column { width: var(--content-width); }
-  .section-line { padding: 32px 0; }
+  .section-line { padding: 64px 0 32px; }
   .bullet-row { grid-template-columns: 40px 1fr; }
   .bullet-row > .status-pill { grid-column: 2; width: fit-content; }
 }
