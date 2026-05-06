@@ -68,7 +68,7 @@ const projects = [
 
 function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="section-line" id={id}>
+    <section className="border-b border-outline-variant py-10" id={id}>
       <div className="middle-column">
         <h2 className="mb-6 font-headline-primary text-[14px] font-bold text-primary">{title}</h2>
         {children}
@@ -82,7 +82,7 @@ export default function ProfilePage() {
     <div className="flex min-h-screen flex-col overflow-x-hidden text-on-surface">
       <Header />
       <main className="page-shell flex-grow">
-        <section className="section-line pt-32" id="profile">
+        <section className="border-b border-outline-variant pb-10 pt-32" id="profile">
           <div className="middle-column">
             <div className="grid gap-8 md:grid-cols-[160px_1fr]">
               <div className="grid h-24 w-24 place-items-center border border-outline-variant bg-primary font-headline-primary text-[28px] font-black text-on-primary">SK</div>
