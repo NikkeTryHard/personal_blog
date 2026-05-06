@@ -32,6 +32,7 @@ function applyTheme(mode: ThemeMode) {
 
 export function ThemeToggle() {
   const [mode, setMode] = useState<ThemeMode>(() => {
+    if (typeof document === 'undefined') return 'dark';
     const serverMode = document.documentElement.dataset.themeMode;
     return isThemeMode(serverMode) ? serverMode : 'dark';
   });
