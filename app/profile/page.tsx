@@ -1,6 +1,10 @@
+import type { Metadata } from 'next';
 import { Header, Footer } from '../chrome';
 import { SearchPanel } from '../search-panel';
 
+export const metadata: Metadata = {
+  title: 'profile · SHOKANEKO',
+};
 
 const projects = [
   {
@@ -65,7 +69,6 @@ const projects = [
   },
 ] as const;
 
-
 function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
     <section className="border-b border-outline-variant py-10" id={id}>
@@ -106,7 +109,6 @@ export default function ProfilePage() {
           </div>
         </section>
 
-
         <Section title="Experience">
           <div className="bullet-row">
             <div>
@@ -134,7 +136,6 @@ export default function ProfilePage() {
             ))}
           </div>
         </Section>
-
 
         <Section title="Languages">
           <div className="grid grid-cols-1 gap-0 border border-outline-variant md:grid-cols-2">
