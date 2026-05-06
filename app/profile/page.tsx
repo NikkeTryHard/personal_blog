@@ -1,12 +1,6 @@
 import { Header, Footer } from '../chrome';
 import { SearchPanel } from '../search-panel';
 
-const impact = [
-  ['670+', 'ZeroGravity GitHub stars'],
-  ['2.2K+', 'AIstudio ProxyAPI stars'],
-  ['2.5M+', 'Tenhou games converted'],
-  ['4.0', 'UTA CS GPA'],
-] as const;
 
 const projects = [
   {
@@ -71,12 +65,6 @@ const projects = [
   },
 ] as const;
 
-const skills = [
-  ['Languages', 'Rust, Python, TypeScript, C'],
-  ['Frameworks', 'Next.js, React, FastAPI, MongoDB, PostgreSQL'],
-  ['Systems', 'Linux, Docker, Seccomp, Landlock, Browser Automation'],
-  ['AI / ML', 'PyTorch, Burn, CUDA, data pipelines, game AI'],
-] as const;
 
 function Section({ id, title, children }: { id?: string; title: string; children: React.ReactNode }) {
   return (
@@ -118,16 +106,6 @@ export default function ProfilePage() {
           </div>
         </section>
 
-        <Section title="Impact">
-          <div className="grid grid-cols-2 border border-outline-variant md:grid-cols-4">
-            {impact.map(([value, label], index) => (
-              <div className={`p-4 ${index < impact.length - 1 ? 'border-r border-outline-variant' : ''}`} key={label}>
-                <div className="font-headline-primary text-[24px] font-black tracking-[-0.06em] text-primary">{value}</div>
-                <div className="mt-1 font-status-label text-status-label text-on-surface-variant">{label}</div>
-              </div>
-            ))}
-          </div>
-        </Section>
 
         <Section title="Experience">
           <div className="bullet-row">
@@ -157,38 +135,6 @@ export default function ProfilePage() {
           </div>
         </Section>
 
-        <Section title="Education">
-          <div className="space-y-4">
-            <div className="bullet-row">
-              <div>
-                <h3 className="font-code-body text-code-body font-bold text-primary">The University of Texas at Arlington</h3>
-                <p className="mt-1 font-code-body text-code-body text-on-surface-variant">B.S. Computer Science · GPA 4.0/4.0 · ACM · Hackathons · Badminton</p>
-              </div>
-              <span className="status-pill px-2 py-1">UTA</span>
-            </div>
-            <div className="bullet-row">
-              <div>
-                <h3 className="font-code-body text-code-body font-bold text-primary">Kyoto Prefectural Rakuhoku Senior High School</h3>
-                <p className="mt-1 font-code-body text-code-body text-on-surface-variant">GPA 3.84/4.00 · 99th percentile Shinken Mock Test · ESS/MUN leadership · SSH-designated school</p>
-              </div>
-              <span className="status-pill px-2 py-1">Kyoto</span>
-            </div>
-          </div>
-        </Section>
-
-        <Section title="Skills">
-          <div>
-            {skills.map(([group, values]) => (
-              <div className="bullet-row" key={group}>
-                <div>
-                  <h3 className="font-code-body text-code-body font-bold text-primary">{group}</h3>
-                  <p className="mt-1 font-code-body text-code-body text-on-surface-variant">{values}</p>
-                </div>
-                <span className="status-pill px-2 py-1">stack</span>
-              </div>
-            ))}
-          </div>
-        </Section>
 
         <Section title="Languages">
           <div className="grid grid-cols-1 gap-0 border border-outline-variant md:grid-cols-2">
