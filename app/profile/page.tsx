@@ -12,9 +12,9 @@ const projects = [
     meta: 'Rust · AI proxy · 30 releases',
     href: 'https://github.com/NikkeTryHard/zerogravity',
     points: [
-      'Open-source Rust proxy for AI coding tools with OpenAI-, Anthropic-, and Gemini-compatible APIs.',
-      'Built bidirectional tool translation and Docker-first cross-platform runtime for Linux, macOS, and Windows.',
-      'Reached 670 GitHub stars, 45 forks, and 9k+ GitHub downloads.',
+      { lead: 'Open-source Rust proxy', rest: 'for AI coding tools with OpenAI-, Anthropic-, and Gemini-compatible APIs.' },
+      { lead: 'Bidirectional tool translation', rest: 'and Docker-first cross-platform runtime for Linux, macOS, and Windows.' },
+      { lead: '670 stars / 45 forks / 9k+ downloads', rest: 'across 30 public releases.' },
     ],
   },
   {
@@ -22,9 +22,9 @@ const projects = [
     meta: 'FastAPI · Playwright · Web UI',
     href: 'https://github.com/CJackHwang/AlstudioProxyAPI',
     points: [
-      'Contributed to an OpenAI-compatible proxy for Google AI Studio with browser-driven AI workflows.',
-      'Improved request queueing, request translation, streaming responses, tests, frontend modernization, and UI automation.',
-      'Ranked #2 contributor on a 2,245-star repository.',
+      { lead: 'OpenAI-compatible Google AI Studio proxy', rest: 'built with FastAPI, Playwright, and a Web UI.' },
+      { lead: 'Request queueing, translation, streaming', rest: 'plus tests, frontend modernization, and UI automation.' },
+      { lead: '#2 contributor', rest: 'on a 2,245-star repository.' },
     ],
   },
   {
@@ -32,9 +32,9 @@ const projects = [
     meta: 'Rust/Python · Linux snapshots · sandboxing',
     href: 'https://github.com/NikkeTryHard/tach-core',
     points: [
-      'Built a test hypervisor for pytest using Linux snapshots to cut reset latency from ~200ms to under 50µs.',
-      'Designed sandboxed execution with Landlock and Seccomp for untrusted tests.',
-      'Validated against Django\'s 9,892-test suite, reducing runtime from ~144s to ~30s.',
+      { lead: 'Pytest test hypervisor', rest: 'using Linux snapshots to cut reset latency from ~200ms to under 50µs.' },
+      { lead: 'Landlock + Seccomp sandboxing', rest: 'for untrusted test execution.' },
+      { lead: 'Django 9,892-test suite', rest: 'reduced from ~144s to ~30s.' },
     ],
   },
   {
@@ -42,9 +42,9 @@ const projects = [
     meta: 'Rust · riichi mahjong AI · training infra',
     href: 'https://github.com/NikkeTryHard/hydra',
     points: [
-      'Built an open-source riichi mahjong AI project aimed at rivaling LuckyJ with open weights.',
-      'Optimized engine performance to 2.36x lower single-game latency and 8.0x higher 4-core batch throughput.',
-      'Validated infrastructure across 2M+ Tenhou and 4M+ Majsoul games using NSF sponsorship.',
+      { lead: 'Open-source riichi mahjong AI', rest: 'aimed at rivaling LuckyJ with open weights.' },
+      { lead: '2.36x lower latency / 8.0x higher throughput', rest: 'versus upstream engine benchmarks.' },
+      { lead: '2M+ Tenhou / 4M+ Majsoul games', rest: 'used to validate training and evaluation infrastructure.' },
     ],
   },
   {
@@ -52,9 +52,9 @@ const projects = [
     meta: 'Rust ETL · dataset publishing',
     href: 'https://github.com/NikkeTryHard/tenhou-to-mjai',
     points: [
-      'Converted Tenhou Phoenix-room logs into MJAI training data across 18 yearly archives.',
-      'Published and validated a 12GB dataset with 2.72B MJAI event lines.',
-      'Created one of the only available datasets for mahjong AI research.',
+      { lead: 'Tenhou Phoenix-room ETL', rest: 'converted logs into MJAI training data across 18 yearly archives.' },
+      { lead: '12GB dataset / 2.72B MJAI events', rest: 'published and validated for downstream research.' },
+      { lead: 'Rare mahjong AI dataset', rest: 'created for an under-served research niche.' },
     ],
   },
   {
@@ -62,9 +62,9 @@ const projects = [
     meta: 'HackUTD 2025 CBRE winner',
     href: 'https://github.com/armaanamatya/HackUTD2025',
     points: [
-      'Contributed to a commercial real estate forecasting and analytics app built with Next.js, FastAPI, and MongoDB.',
-      'Integrated full-stack workflows across frontend, backend, and agentic document/research features.',
-      'Shipped under a 24-hour hackathon timeline.',
+      { lead: 'Commercial real estate forecasting app', rest: 'built with Next.js, FastAPI, and MongoDB.' },
+      { lead: 'Full-stack agentic workflow', rest: 'across frontend, backend, document parsing, and research features.' },
+      { lead: '24-hour hackathon ship', rest: 'for the HackUTD 2025 CBRE track.' },
     ],
   },
 ] as const;
@@ -77,6 +77,14 @@ function Section({ id, title, children }: { id?: string; title: string; children
         {children}
       </div>
     </section>
+  );
+}
+
+function BulletText({ lead, rest }: { lead: string; rest: string }) {
+  return (
+    <p className="font-code-body text-code-body text-on-surface-variant">
+      - <strong className="font-bold text-primary">{lead}</strong> {rest}
+    </p>
   );
 }
 
@@ -100,7 +108,7 @@ export default function ProfilePage() {
                   <span>AI infrastructure / systems / developer tooling</span>
                 </div>
                 <p className="mt-5 max-w-[620px] font-code-body text-code-body text-on-surface-variant">
-                  CS student building open-source Game AI, browser automation, data pipelines, and full-stack tools in Rust, Python, and TypeScript. Focused on AI infrastructure, backend systems, developer tooling, and high-performance software.
+                  CS student building <strong className="font-bold text-primary">open-source Game AI</strong>, <strong className="font-bold text-primary">browser automation</strong>, <strong className="font-bold text-primary">data pipelines</strong>, and <strong className="font-bold text-primary">full-stack tools</strong> in Rust, Python, and TypeScript. Focused on <strong className="font-bold text-primary">AI infrastructure</strong>, backend systems, developer tooling, and high-performance software.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <a className="op-button" href="https://github.com/NikkeTryHard">GitHub</a>
@@ -116,8 +124,11 @@ export default function ProfilePage() {
           <div className="bullet-row">
             <div>
               <h3 className="font-code-body text-code-body font-bold text-primary">AI Engineering Intern @ Akari Inc.</h3>
-              <p className="mt-1 font-code-body text-code-body text-on-surface-variant">Tokyo · one of the company&apos;s first high school interns</p>
-              <p className="mt-3 font-code-body text-code-body text-on-surface-variant">Developed a Gaussian Splitting Model for 3D object replication, moving processing from hours toward real-time execution. Implemented an LM optimizer for point cloud density and improved visual fidelity of generated 3D assets.</p>
+              <p className="mt-1 font-status-label text-status-label text-on-surface-variant">Tokyo · one of the company&apos;s first high school interns</p>
+              <div className="mt-3 space-y-1">
+                <BulletText lead="Gaussian Splitting Model" rest="for 3D object replication, moving processing from hours toward real-time execution." />
+                <BulletText lead="LM optimizer" rest="for point cloud density, improving visual fidelity of generated 3D assets." />
+              </div>
             </div>
             <span className="status-pill px-2 py-1">AI / 3D</span>
           </div>
@@ -130,9 +141,9 @@ export default function ProfilePage() {
                 <div>
                   <h3 className="font-code-body text-code-body font-bold text-primary group-hover:underline">{project.name}</h3>
                   <p className="mt-1 font-status-label text-status-label text-on-surface-variant">{project.meta}</p>
-                  <ul className="mt-3 space-y-1 font-code-body text-code-body text-on-surface-variant">
-                    {project.points.map((point) => <li key={point}>- {point}</li>)}
-                  </ul>
+                  <div className="mt-3 space-y-1">
+                    {project.points.map((point) => <BulletText key={point.lead} lead={point.lead} rest={point.rest} />)}
+                  </div>
                 </div>
                 <span className="status-pill px-2 py-1">open</span>
               </a>
