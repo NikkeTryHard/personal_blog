@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Header, Footer } from '../chrome';
 import { SearchPanel } from '../search-panel';
 
@@ -10,7 +11,7 @@ const projects = [
   {
     name: 'ZeroGravity',
     meta: 'Rust · AI proxy · 30 releases',
-    href: 'https://github.com/NikkeTryHard/zerogravity',
+    href: '/projects/zerogravity',
     points: [
       { lead: 'Open-source Rust proxy', rest: 'for AI coding tools with OpenAI-, Anthropic-, and Gemini-compatible APIs.' },
       { lead: 'Bidirectional tool translation', rest: 'and Docker-first cross-platform runtime for Linux, macOS, and Windows.' },
@@ -20,7 +21,7 @@ const projects = [
   {
     name: 'AIstudio ProxyAPI',
     meta: 'FastAPI · Playwright · Web UI',
-    href: 'https://github.com/CJackHwang/AlstudioProxyAPI',
+    href: '/projects/aistudio-proxyapi',
     points: [
       { lead: 'OpenAI-compatible Google AI Studio proxy', rest: 'built with FastAPI, Playwright, and a Web UI.' },
       { lead: 'Request queueing, translation, streaming', rest: 'plus tests, frontend modernization, and UI automation.' },
@@ -30,7 +31,7 @@ const projects = [
   {
     name: 'tach-core',
     meta: 'Rust/Python · Linux snapshots · sandboxing',
-    href: 'https://github.com/NikkeTryHard/tach-core',
+    href: '/projects/tach-core',
     points: [
       { lead: 'Pytest test hypervisor', rest: 'using Linux snapshots to cut reset latency from ~200ms to under 50µs.' },
       { lead: 'Landlock + Seccomp sandboxing', rest: 'for untrusted test execution.' },
@@ -40,7 +41,7 @@ const projects = [
   {
     name: 'Hydra',
     meta: 'Rust · riichi mahjong AI · training infra',
-    href: 'https://github.com/NikkeTryHard/hydra',
+    href: '/projects/hydra',
     points: [
       { lead: 'Open-source riichi mahjong AI', rest: 'aimed at rivaling LuckyJ with open weights.' },
       { lead: '2.36x lower latency / 8.0x higher throughput', rest: 'versus upstream engine benchmarks.' },
@@ -50,7 +51,7 @@ const projects = [
   {
     name: 'Tenhou-to-MJAI',
     meta: 'Rust ETL · dataset publishing',
-    href: 'https://github.com/NikkeTryHard/tenhou-to-mjai',
+    href: '/projects/tenhou-to-mjai',
     points: [
       { lead: 'Tenhou Phoenix-room ETL', rest: 'converted logs into MJAI training data across 18 yearly archives.' },
       { lead: '12GB dataset / 2.72B MJAI events', rest: 'published and validated for downstream research.' },
@@ -60,7 +61,7 @@ const projects = [
   {
     name: 'Cura',
     meta: 'HackUTD 2025 CBRE winner',
-    href: 'https://github.com/armaanamatya/HackUTD2025',
+    href: '/projects/cura',
     points: [
       { lead: 'Commercial real estate forecasting app', rest: 'built with Next.js, FastAPI, and MongoDB.' },
       { lead: 'Full-stack agentic workflow', rest: 'across frontend, backend, document parsing, and research features.' },
@@ -137,7 +138,7 @@ export default function ProfilePage() {
         <Section id="projects" title="Projects">
           <div>
             {projects.map((project) => (
-              <a className="bullet-row group" href={project.href} key={project.name}>
+              <Link className="bullet-row group" href={project.href} key={project.name}>
                 <div>
                   <h3 className="font-code-body text-code-body font-bold text-primary group-hover:underline">{project.name}</h3>
                   <p className="mt-1 font-status-label text-status-label text-on-surface-variant">{project.meta}</p>
@@ -146,7 +147,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
                 <span className="status-pill px-2 py-1">open</span>
-              </a>
+              </Link>
             ))}
           </div>
         </Section>
